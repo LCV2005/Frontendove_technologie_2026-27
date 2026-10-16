@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 
-// Použijeme len jeden reaktívny zoznam, ktorý má všetky dáta
 const students = ref([
   { name: 'Anna', vek: 20, znamka: "C" },
   { name: 'Peter', vek: 22, znamka: "B" },
@@ -9,7 +8,6 @@ const students = ref([
   { name: 'Martin', vek: 23, znamka: "D" }
 ])
 
-// Opravené: mazeme zo správneho zoznamu (students)
 const vymazElement = (index) => {
   students.value.splice(index, 1)
 }
@@ -17,12 +15,27 @@ const vymazElement = (index) => {
 
 <template>
   <div>
-    <ul>
-      <li v-for="(item, index) in students" :key="item.name + item.vek + item.znamka">
-        {{ item.name }} ({{ item.vek }} rokov) - Známka: {{ item.znamka }}
-        <input type="text">
-        <button v-on:click="vymazElement(index)">Vymaž</button>
-      </li>
-    </ul>
+    <table v-if="students.length > 0" border="1" cellpadding="8">
+      <thead>
+        <tr>
+          <th>Meno</th>
+          <th>Vek</th>
+          <th>Znamka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in students" :key="item.name + item.vek + item.znamka">
+          <td>{{ item.name }}</td>
+          <td>{{ item.vek }}</td>
+          <td>{{ item.znamka }}</td>
+          <td>
+            <input type="text" placeholder="Poznámka...">
+            <button @click="vymazElement(index)">Vymaž</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p v-else>Nenašli sa študenti</p>
   </div>
 </template>
