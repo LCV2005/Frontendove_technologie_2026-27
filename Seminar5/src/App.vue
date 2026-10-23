@@ -1,9 +1,7 @@
 <script setup>
-import Clicker from './components/Test.vue'
+import Blog from './components/Blog.vue'
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <Clicker />
-  <Clicker />
+  <Blog />
 </template>
